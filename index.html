@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="UI Kit del sistema de control de rescates y adopciones animales">
+  <title>UI Kit | Sistema de Rescates y Adopciones</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Enlace de accesibilidad para usuarios de teclado -->
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+  <!-- ===================== ENCABEZADO ===================== -->
+  <header class="encabezado">
+    <div class="contenedor">
+      <h1>🐾 UI Kit – Rescates y Adopciones</h1>
+      <p>Librería de componentes reutilizables desarrollada con CSS3 puro para el sistema de control de rescates y adopciones animales.</p>
+    </div>
+  </header>
+
+  <main id="contenido" class="contenedor">
+
+    <!-- ===================== 1. PALETA ===================== -->
+    <section class="seccion" aria-labelledby="titulo-paleta">
+      <h2 id="titulo-paleta">1. Paleta de colores</h2>
+      <p class="seccion__descripcion">Variables definidas en <code>:root</code> y usadas por todos los componentes.</p>
+
+      <div class="paleta">
+        <div class="paleta__muestra">
+          <div class="paleta__color paleta__color--primario"></div>
+          <div class="paleta__info"><strong>Primario</strong><br><code>--color-primario</code></div>
+        </div>
+        <div class="paleta__muestra">
+          <div class="paleta__color paleta__color--secundario"></div>
+          <div class="paleta__info"><strong>Secundario</strong><br><code>--color-secundario</code></div>
+        </div>
+        <div class="paleta__muestra">
+          <div class="paleta__color paleta__color--exito"></div>
+          <div class="paleta__info"><strong>Éxito</strong><br><code>--color-exito</code></div>
+        </div>
+        <div class="paleta__muestra">
+          <div class="paleta__color paleta__color--error"></div>
+          <div class="paleta__info"><strong>Error</strong><br><code>--color-error</code></div>
+        </div>
+        <div class="paleta__muestra">
+          <div class="paleta__color paleta__color--advertencia"></div>
+          <div class="paleta__info"><strong>Advertencia</strong><br><code>--color-advertencia</code></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== 2. BOTONES ===================== -->
+    <section class="seccion" aria-labelledby="titulo-botones">
+      <h2 id="titulo-botones">2. Botones</h2>
+      <p class="seccion__descripcion">Pase el cursor (<code>:hover</code>) o navegue con la tecla Tab (<code>:focus</code>) para ver los estados de interacción.</p>
+
+      <div class="fila">
+        <button type="button" class="btn btn--primario">Registrar rescate</button>
+        <button type="button" class="btn btn--secundario">Ver adopciones</button>
+        <button type="button" class="btn btn--peligro">Eliminar registro</button>
+        <button type="button" class="btn btn--contorno">Cancelar</button>
+        <button type="button" class="btn btn--primario" disabled>Deshabilitado</button>
+      </div>
+
+      <h3 class="subtitulo">Tamaños</h3>
+      <div class="fila">
+        <button type="button" class="btn btn--primario btn--sm">Pequeño</button>
+        <button type="button" class="btn btn--primario">Normal</button>
+        <button type="button" class="btn btn--primario btn--lg">Grande</button>
+      </div>
+    </section>
+
+    <!-- ===================== 3. FORMULARIOS ===================== -->
+    <section class="seccion" aria-labelledby="titulo-form">
+      <h2 id="titulo-form">3. Formularios</h2>
+      <p class="seccion__descripcion">Campos con bordes, padding y anillo de color al recibir el foco. Los campos inválidos se marcan en rojo.</p>
+
+      <form class="formulario" action="#" novalidate>
+        <div class="form-grupo">
+          <label class="form-label form-label--requerido" for="nombre">Nombre del animal</label>
+          <input class="form-control" type="text" id="nombre" name="nombre" placeholder="Ej.: Luna" required>
+        </div>
+
+        <div class="form-grupo">
+          <label class="form-label form-label--requerido" for="especie">Especie</label>
+          <select class="form-control" id="especie" name="especie" required>
+            <option value="">Seleccione una opción</option>
+            <option value="perro">Perro</option>
+            <option value="gato">Gato</option>
+            <option value="otro">Otro</option>
+          </select>
+        </div>
+
+        <div class="form-grupo">
+          <label class="form-label" for="urgencia">Nivel de urgencia</label>
+          <select class="form-control" id="urgencia" name="urgencia">
+            <option value="alta">Alta</option>
+            <option value="media" selected>Media</option>
+            <option value="baja">Baja</option>
+          </select>
+        </div>
+
+        <div class="form-grupo">
+          <label class="form-label" for="correo">Correo del rescatista</label>
+          <input class="form-control" type="email" id="correo" name="correo" placeholder="correo@ejemplo.com" aria-describedby="ayuda-correo">
+          <small id="ayuda-correo" class="form-ayuda">Escriba un correo inválido para ver el estado de error.</small>
+        </div>
+
+        <div class="form-grupo">
+          <label class="form-label" for="fecha">Fecha del rescate</label>
+          <input class="form-control" type="date" id="fecha" name="fecha">
+        </div>
+
+        <div class="form-grupo">
+          <label class="form-label" for="codigo">Código de caso</label>
+          <input class="form-control" type="text" id="codigo" name="codigo" value="RSC-0001" disabled>
+        </div>
+
+        <div class="form-grupo form-grupo--completo">
+          <label class="form-label" for="observaciones">Observaciones</label>
+          <textarea class="form-control" id="observaciones" name="observaciones" placeholder="Estado de salud, lugar del rescate, etc."></textarea>
+        </div>
+
+        <div class="form-acciones">
+          <button type="reset" class="btn btn--contorno">Limpiar</button>
+          <button type="submit" class="btn btn--primario">Guardar caso</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- ===================== 4. TARJETAS ===================== -->
+    <section class="seccion" aria-labelledby="titulo-cards">
+      <h2 id="titulo-cards">4. Tarjetas (Cards)</h2>
+      <p class="seccion__descripcion">Contenedores con <code>box-shadow</code> y bordes redondeados para mostrar la información de cada animal.</p>
+
+      <div class="grilla">
+        <article class="card card--urgente">
+          <div class="card__imagen card__imagen--perro" role="img" aria-label="Ilustración de un perro">🐕</div>
+          <div class="card__cuerpo">
+            <div class="card__titulo">
+              <h3>Rocky</h3>
+              <span class="badge badge--alta">Alta</span>
+            </div>
+            <ul class="card__datos">
+              <li><strong>Especie:</strong> Perro mestizo</li>
+              <li><strong>Edad:</strong> 3 años aprox.</li>
+              <li><strong>Lugar:</strong> Av. 9 de Octubre</li>
+            </ul>
+            <div class="card__etiquetas">
+              <span class="badge badge--tratamiento">En tratamiento</span>
+            </div>
+          </div>
+          <div class="card__pie">
+            <button type="button" class="btn btn--primario btn--sm">Ver ficha</button>
+            <button type="button" class="btn btn--contorno btn--sm">Editar</button>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card__imagen card__imagen--gato" role="img" aria-label="Ilustración de un gato">🐈</div>
+          <div class="card__cuerpo">
+            <div class="card__titulo">
+              <h3>Luna</h3>
+              <span class="badge badge--media">Media</span>
+            </div>
+            <ul class="card__datos">
+              <li><strong>Especie:</strong> Gato doméstico</li>
+              <li><strong>Edad:</strong> 1 año</li>
+              <li><strong>Lugar:</strong> Parque Centenario</li>
+            </ul>
+            <div class="card__etiquetas">
+              <span class="badge badge--adopcion">En adopción</span>
+            </div>
+          </div>
+          <div class="card__pie">
+            <button type="button" class="btn btn--secundario btn--sm">Adoptar</button>
+            <button type="button" class="btn btn--contorno btn--sm">Editar</button>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card__imagen card__imagen--otro" role="img" aria-label="Ilustración de un conejo">🐇</div>
+          <div class="card__cuerpo">
+            <div class="card__titulo">
+              <h3>Copo</h3>
+              <span class="badge badge--baja">Baja</span>
+            </div>
+            <ul class="card__datos">
+              <li><strong>Especie:</strong> Conejo</li>
+              <li><strong>Edad:</strong> 8 meses</li>
+              <li><strong>Lugar:</strong> Barrio Las Peñas</li>
+            </ul>
+            <div class="card__etiquetas">
+              <span class="badge badge--adoptado">Adoptado</span>
+            </div>
+          </div>
+          <div class="card__pie">
+            <button type="button" class="btn btn--primario btn--sm">Ver ficha</button>
+            <button type="button" class="btn btn--peligro btn--sm">Archivar</button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===================== 5. BADGES Y ALERTAS ===================== -->
+    <section class="seccion" aria-labelledby="titulo-badges">
+      <h2 id="titulo-badges">5. Badges y alertas</h2>
+      <p class="seccion__descripcion">Etiquetas de color para identificar la urgencia del caso o el estado del animal. Incluyen texto y un punto indicador para no depender solo del color.</p>
+
+      <h3 class="subtitulo">Urgencia del caso</h3>
+      <div class="fila">
+        <span class="badge badge--alta">Alta</span>
+        <span class="badge badge--media">Media</span>
+        <span class="badge badge--baja">Baja</span>
+      </div>
+
+      <h3 class="subtitulo">Estado del animal</h3>
+      <div class="fila">
+        <span class="badge badge--rescatado">Rescatado</span>
+        <span class="badge badge--tratamiento">En tratamiento</span>
+        <span class="badge badge--adopcion">En adopción</span>
+        <span class="badge badge--adoptado">Adoptado</span>
+      </div>
+
+      <h3 class="subtitulo">Alertas del sistema</h3>
+      <div class="pila">
+        <p class="alerta alerta--exito" role="status">✔ El rescate fue registrado correctamente.</p>
+        <p class="alerta alerta--advertencia" role="status">⚠ Hay 3 casos pendientes de revisión veterinaria.</p>
+        <p class="alerta alerta--error" role="alert">✖ No se pudo guardar: complete los campos obligatorios.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="pie">
+    <p>UI Kit – Sistema de Control de Rescates y Adopciones Animales · Desarrollo de Sistemas Informáticos</p>
+  </footer>
+</body>
+</html>
