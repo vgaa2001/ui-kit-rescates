@@ -1,0 +1,700 @@
+/* ==========================================================================
+   UI KIT - Sistema de Control de Rescates y Adopciones Animales
+   Archivo: style.css
+   Descripción: Librería de componentes reutilizables en CSS3 puro
+                (sin frameworks). Contiene variables, base, utilidades,
+                botones, formularios, tarjetas y badges.
+   ========================================================================== */
+
+/* ==========================================================================
+   1. DESIGN TOKENS (Variables CSS en :root)
+   ========================================================================== */
+:root {
+  /* --- Paleta corporativa --- */
+  --color-primario: #1f6f78;        /* Verde azulado: confianza / cuidado */
+  --color-primario-oscuro: #155158;
+  --color-primario-claro: #e3f1f2;
+
+  --color-secundario: #f2a541;      /* Naranja cálido: calidez / adopción */
+  --color-secundario-oscuro: #c97f1c;
+  --color-secundario-claro: #fdf1df;
+
+  --color-exito: #2e7d32;
+  --color-exito-claro: #e6f4e7;
+
+  --color-error: #c62828;
+  --color-error-oscuro: #9e1f1f;
+  --color-error-claro: #fdeaea;
+
+  --color-advertencia: #b26a00;     /* Ámbar oscuro (contraste AA con blanco) */
+  --color-advertencia-claro: #fff4e0;
+
+  /* --- Neutros --- */
+  --color-texto: #1f2933;
+  --color-texto-suave: #52606d;
+  --color-borde: #cbd2d9;
+  --color-fondo: #f5f7fa;
+  --color-superficie: #ffffff;
+
+  /* --- Tipografía --- */
+  --fuente-base: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --fuente-titulos: Georgia, "Times New Roman", serif;
+  --texto-xs: 0.75rem;
+  --texto-sm: 0.875rem;
+  --texto-base: 1rem;
+  --texto-lg: 1.25rem;
+  --texto-xl: 1.75rem;
+  --texto-2xl: 2.25rem;
+  --peso-normal: 400;
+  --peso-semibold: 600;
+  --peso-bold: 700;
+  --interlineado: 1.6;
+
+  /* --- Espaciado (escala de 4px) --- */
+  --esp-1: 0.25rem;
+  --esp-2: 0.5rem;
+  --esp-3: 0.75rem;
+  --esp-4: 1rem;
+  --esp-6: 1.5rem;
+  --esp-8: 2rem;
+  --esp-12: 3rem;
+
+  /* --- Bordes, sombras y transiciones --- */
+  --radio-sm: 4px;
+  --radio-md: 8px;
+  --radio-lg: 16px;
+  --radio-pill: 999px;
+
+  --sombra-sm: 0 1px 3px rgba(31, 41, 51, 0.12);
+  --sombra-md: 0 4px 12px rgba(31, 41, 51, 0.12);
+  --sombra-lg: 0 10px 24px rgba(31, 41, 51, 0.18);
+
+  --anillo-foco: 0 0 0 3px rgba(31, 111, 120, 0.35);
+  --transicion: 0.2s ease-in-out;
+}
+
+/* ==========================================================================
+   2. BASE / RESET
+   ========================================================================== */
+
+/* Regla general del modelo de cajas */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 100%; /* 16px: respeta la configuración del usuario */
+}
+
+body {
+  font-family: var(--fuente-base);
+  font-size: var(--texto-base);
+  line-height: var(--interlineado);
+  color: var(--color-texto);
+  background-color: var(--color-fondo);
+}
+
+h1, h2, h3 {
+  font-family: var(--fuente-titulos);
+  line-height: 1.25;
+  color: var(--color-primario-oscuro);
+}
+
+h1 { font-size: var(--texto-2xl); }
+h2 { font-size: var(--texto-xl); margin-bottom: var(--esp-4); }
+h3 { font-size: var(--texto-lg); }
+
+p + p { margin-top: var(--esp-2); } /* Selector de hermano adyacente */
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: var(--color-primario);
+}
+
+/* Foco visible accesible para cualquier elemento navegable por teclado */
+:focus-visible {
+  outline: 3px solid var(--color-secundario);
+  outline-offset: 2px;
+}
+
+/* Texto solo para lectores de pantalla */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+
+/* Enlace "saltar al contenido" (accesibilidad) */
+.skip-link {
+  position: absolute;
+  top: var(--esp-2);
+  left: var(--esp-4);
+  transform: translateY(-200%);   /* Oculto hasta recibir el foco */
+  padding: var(--esp-2) var(--esp-4);
+  background: var(--color-primario-oscuro);
+  color: #fff;
+  border-radius: var(--radio-sm);
+  z-index: 10;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+/* ==========================================================================
+   3. LAYOUT DE LA PÁGINA DE DEMOSTRACIÓN
+   ========================================================================== */
+.contenedor {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 var(--esp-4);
+}
+
+.encabezado {
+  background: linear-gradient(135deg, var(--color-primario), var(--color-primario-oscuro));
+  color: #fff;
+  padding: var(--esp-8) 0;
+}
+
+.encabezado h1 { color: #fff; }
+
+.encabezado p {
+  opacity: 0.9;
+  max-width: 60ch;
+}
+
+.seccion {
+  padding: var(--esp-8) 0;
+  border-bottom: 1px solid var(--color-borde);
+}
+
+.seccion:last-of-type { border-bottom: none; }
+
+.seccion__descripcion {
+  color: var(--color-texto-suave);
+  margin-bottom: var(--esp-6);
+}
+
+/* Fila de elementos que se acomoda sola */
+.fila {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--esp-3);
+  align-items: center;
+}
+
+/* Cuadrícula adaptable (sin media queries gracias a auto-fit) */
+.grilla {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--esp-6);
+}
+
+/* Muestras de la paleta de colores */
+.paleta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: var(--esp-4);
+}
+
+.paleta__muestra {
+  border-radius: var(--radio-md);
+  overflow: hidden;
+  box-shadow: var(--sombra-sm);
+  background: var(--color-superficie);
+  font-size: var(--texto-sm);
+}
+
+.paleta__color {
+  height: 70px;
+}
+
+.paleta__color--primario    { background-color: var(--color-primario); }
+.paleta__color--secundario  { background-color: var(--color-secundario); }
+.paleta__color--exito       { background-color: var(--color-exito); }
+.paleta__color--error       { background-color: var(--color-error); }
+.paleta__color--advertencia { background-color: var(--color-advertencia); }
+
+.subtitulo {
+  margin: var(--esp-6) 0 var(--esp-3);
+}
+
+.seccion__descripcion + .subtitulo {
+  margin-top: 0;
+}
+
+.paleta__info {
+  padding: var(--esp-2) var(--esp-3);
+}
+
+.paleta__info code {
+  color: var(--color-texto-suave);
+}
+
+.pie {
+  text-align: center;
+  padding: var(--esp-6) 0;
+  font-size: var(--texto-sm);
+  color: var(--color-texto-suave);
+}
+
+/* ==========================================================================
+   4. COMPONENTE: BOTONES
+   Uso: <button class="btn btn--primario">Texto</button>
+   Variantes: --primario | --secundario | --peligro | --contorno
+   Tamaños:   --sm | --lg   Modificador: --bloque (ancho completo)
+   ========================================================================== */
+
+/* Clase base común (evita duplicar estilos en cada variante) */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--esp-2);
+  min-height: 44px;                 /* Área táctil mínima recomendada */
+  padding: var(--esp-2) var(--esp-6);
+  font-family: inherit;
+  font-size: var(--texto-base);
+  font-weight: var(--peso-semibold);
+  line-height: 1.2;
+  text-decoration: none;
+  border: 2px solid transparent;
+  border-radius: var(--radio-md);
+  cursor: pointer;
+  transition: background-color var(--transicion),
+              border-color var(--transicion),
+              box-shadow var(--transicion),
+              transform var(--transicion);
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--sombra-md);
+}
+
+.btn:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+.btn:focus-visible {
+  outline: none;
+  box-shadow: var(--anillo-foco);
+}
+
+/* Estado deshabilitado (pseudoclase + selector de atributo) */
+.btn:disabled,
+.btn[aria-disabled="true"] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* --- Variantes --- */
+.btn--primario {
+  background-color: var(--color-primario);
+  color: #fff;
+}
+
+.btn--primario:hover:not(:disabled) {
+  background-color: var(--color-primario-oscuro);
+}
+
+.btn--secundario {
+  background-color: var(--color-secundario);
+  color: var(--color-texto);
+}
+
+.btn--secundario:hover:not(:disabled) {
+  background-color: var(--color-secundario-oscuro);
+  color: #fff;
+}
+
+.btn--secundario:focus-visible {
+  box-shadow: 0 0 0 3px rgba(242, 165, 65, 0.45);
+}
+
+.btn--peligro {
+  background-color: var(--color-error);
+  color: #fff;
+}
+
+.btn--peligro:hover:not(:disabled) {
+  background-color: var(--color-error-oscuro);
+}
+
+.btn--peligro:focus-visible {
+  box-shadow: 0 0 0 3px rgba(198, 40, 40, 0.35);
+}
+
+.btn--contorno {
+  background-color: transparent;
+  border-color: var(--color-primario);
+  color: var(--color-primario);
+}
+
+.btn--contorno:hover:not(:disabled) {
+  background-color: var(--color-primario-claro);
+}
+
+/* --- Tamaños y modificadores --- */
+.btn--sm {
+  min-height: 36px;
+  padding: var(--esp-1) var(--esp-4);
+  font-size: var(--texto-sm);
+}
+
+.btn--lg {
+  min-height: 52px;
+  padding: var(--esp-3) var(--esp-8);
+  font-size: var(--texto-lg);
+}
+
+.btn--bloque {
+  width: 100%;
+}
+
+/* ==========================================================================
+   5. COMPONENTE: FORMULARIOS
+   Uso: .form-grupo > label.form-label + input.form-control / select.form-control
+   ========================================================================== */
+.formulario {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--esp-4) var(--esp-6);
+  background: var(--color-superficie);
+  padding: var(--esp-6);
+  border-radius: var(--radio-lg);
+  box-shadow: var(--sombra-sm);
+}
+
+.form-grupo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-1);
+}
+
+.form-grupo--completo {
+  grid-column: 1 / -1;  /* Ocupa todo el ancho de la grilla */
+}
+
+.form-label {
+  font-size: var(--texto-sm);
+  font-weight: var(--peso-semibold);
+  color: var(--color-texto);
+}
+
+/* Asterisco automático para campos obligatorios (pseudoelemento) */
+.form-label--requerido::after {
+  content: " *";
+  color: var(--color-error);
+}
+
+/* Clase común para input, select y textarea */
+.form-control {
+  width: 100%;
+  min-height: 44px;
+  padding: var(--esp-2) var(--esp-3);
+  font-family: inherit;
+  font-size: var(--texto-base);
+  color: var(--color-texto);
+  background-color: var(--color-superficie);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio-md);
+  transition: border-color var(--transicion), box-shadow var(--transicion);
+}
+
+.form-control::placeholder {
+  color: #8a96a3;
+}
+
+.form-control:hover {
+  border-color: var(--color-texto-suave);
+}
+
+/* Efecto visual al recibir el foco */
+.form-control:focus {
+  outline: none;
+  border-color: var(--color-primario);
+  box-shadow: var(--anillo-foco);
+}
+
+/* Validación: solo en campos con placeholder y después de que el usuario
+   escribió (selector de atributo + :not() + :placeholder-shown) */
+input.form-control[placeholder]:not(:placeholder-shown):invalid {
+  border-color: var(--color-error);
+  background-color: var(--color-error-claro);
+}
+
+input.form-control[placeholder]:not(:placeholder-shown):valid {
+  border-color: var(--color-exito);
+}
+
+.form-control:disabled {
+  background-color: var(--color-fondo);
+  cursor: not-allowed;
+}
+
+/* Select con flecha personalizada (selector de elemento + clase) */
+select.form-control {
+  appearance: none;
+  padding-right: var(--esp-8);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2352606d' stroke-width='2' fill='none'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right var(--esp-3) center;
+  cursor: pointer;
+}
+
+textarea.form-control {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.form-ayuda {
+  font-size: var(--texto-xs);
+  color: var(--color-texto-suave);
+}
+
+.form-acciones {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--esp-3);
+  justify-content: flex-end;
+}
+
+/* ==========================================================================
+   6. COMPONENTE: TARJETAS (CARDS)
+   Uso: article.card > img.card__imagen + .card__cuerpo + .card__pie
+   ========================================================================== */
+.card {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-superficie);
+  border-radius: var(--radio-lg);
+  box-shadow: var(--sombra-md);
+  overflow: hidden;              /* Recorta la imagen con el borde redondeado */
+  transition: transform var(--transicion), box-shadow var(--transicion);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--sombra-lg);
+}
+
+/* Resalta la tarjeta si un elemento interno recibe el foco del teclado */
+.card:focus-within {
+  box-shadow: var(--sombra-lg), var(--anillo-foco);
+}
+
+.card__imagen {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  background-color: var(--color-primario-claro);
+  /* Si se usa un <div> como marcador (sin foto), centra el ícono */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 4rem;
+}
+
+.card__imagen--gato  { background-color: var(--color-secundario-claro); }
+.card__imagen--perro { background-color: var(--color-primario-claro); }
+.card__imagen--otro  { background-color: var(--color-exito-claro); }
+
+.card__cuerpo {
+  flex: 1;
+  padding: var(--esp-4) var(--esp-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-2);
+}
+
+.card__titulo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--esp-2);
+}
+
+/* Lista de datos del animal */
+.card__datos {
+  list-style: none;
+  font-size: var(--texto-sm);
+  color: var(--color-texto-suave);
+}
+
+.card__datos li strong {
+  color: var(--color-texto);
+}
+
+.card__etiquetas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--esp-2);
+}
+
+.card__pie {
+  display: flex;
+  gap: var(--esp-2);
+  padding: var(--esp-4) var(--esp-6);
+  border-top: 1px solid var(--color-borde);
+}
+
+/* Los botones del pie se reparten el espacio */
+.card__pie > .btn {
+  flex: 1;
+}
+
+/* Variante destacada para casos urgentes: franja lateral roja */
+.card--urgente {
+  border-left: 6px solid var(--color-error);
+}
+
+/* ==========================================================================
+   7. COMPONENTE: BADGES / ALERTAS DE URGENCIA Y ESTADO
+   Uso: <span class="badge badge--alta">Alta</span>
+   Urgencia: --alta | --media | --baja
+   Estado:   --rescatado | --tratamiento | --adopcion | --adoptado
+   ========================================================================== */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--esp-1);
+  padding: 2px var(--esp-3);
+  font-size: var(--texto-xs);
+  font-weight: var(--peso-bold);
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  border-radius: var(--radio-pill);
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+
+/* Punto indicador antes del texto (no depende solo del color) */
+.badge::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: currentColor;
+}
+
+/* --- Urgencia del caso --- */
+.badge--alta {
+  background-color: var(--color-error-claro);
+  color: var(--color-error);
+  border-color: var(--color-error);
+}
+
+.badge--media {
+  background-color: var(--color-advertencia-claro);
+  color: var(--color-advertencia);
+  border-color: var(--color-advertencia);
+}
+
+.badge--baja {
+  background-color: var(--color-exito-claro);
+  color: var(--color-exito);
+  border-color: var(--color-exito);
+}
+
+/* Animación de pulso solo en urgencia alta */
+.badge--alta::before {
+  animation: pulso 1.4s infinite;
+}
+
+@keyframes pulso {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.3; }
+}
+
+/* --- Estado del animal --- */
+.badge--rescatado {
+  background-color: var(--color-primario-claro);
+  color: var(--color-primario-oscuro);
+}
+
+.badge--tratamiento {
+  background-color: var(--color-advertencia-claro);
+  color: var(--color-advertencia);
+}
+
+.badge--adopcion {
+  background-color: var(--color-secundario-claro);
+  color: var(--color-secundario-oscuro);
+}
+
+.badge--adoptado {
+  background-color: var(--color-exito);
+  color: #fff;
+}
+
+/* Alerta en bloque (mensajes del sistema) */
+.alerta {
+  padding: var(--esp-3) var(--esp-4);
+  border-radius: var(--radio-md);
+  border-left: 5px solid;
+  font-size: var(--texto-sm);
+}
+
+.alerta--exito       { background: var(--color-exito-claro);       border-color: var(--color-exito);       color: var(--color-exito); }
+.alerta--error       { background: var(--color-error-claro);       border-color: var(--color-error);       color: var(--color-error-oscuro); }
+.alerta--advertencia { background: var(--color-advertencia-claro); border-color: var(--color-advertencia); color: #7a4800; }
+
+.pila {
+  display: grid;
+  gap: var(--esp-3);
+}
+
+/* ==========================================================================
+   8. DISEÑO ADAPTABLE (Media Queries)
+   ========================================================================== */
+
+/* Tablets y celulares */
+@media (max-width: 768px) {
+  :root {
+    --texto-2xl: 1.75rem;
+    --texto-xl: 1.4rem;
+  }
+
+  .encabezado { padding: var(--esp-6) 0; }
+  .seccion    { padding: var(--esp-6) 0; }
+  .formulario { padding: var(--esp-4); }
+}
+
+/* Celulares pequeños: botones a ancho completo */
+@media (max-width: 480px) {
+  .fila > .btn,
+  .form-acciones > .btn {
+    width: 100%;
+  }
+
+  .card__pie {
+    flex-direction: column;
+  }
+}
+
+/* Respeta a usuarios que prefieren menos movimiento */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
